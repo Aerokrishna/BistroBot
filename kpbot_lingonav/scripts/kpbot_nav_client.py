@@ -3,7 +3,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
 from rclpy.action.client import ClientGoalHandle, GoalStatus
-from kpbot_interfaces.action import PynavGoal
+from kpbot_interface.action import PynavGoal
 from lingonav import InferHumanCommand
 
 

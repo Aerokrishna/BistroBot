@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot name="kpbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name="wheel_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://kpbot_description/models/meshes/wheel.stl"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="black" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.03" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </collision>
+        <inertial>
+            <mass value="0.5"/>
+            <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+            <origin xyz="0 0 0"/>
+        </inertial>
+    </link>
+
+</robot>

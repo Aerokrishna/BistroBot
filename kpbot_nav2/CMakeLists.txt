@@ -35,6 +35,9 @@ install(
 set(SCRIPTS_DIR scripts)
 install(PROGRAMS
     ${SCRIPTS_DIR}/nav2_api.py
+    ${SCRIPTS_DIR}/joy_control.py
+    ${SCRIPTS_DIR}/odometry.py
+
     DESTINATION lib/${PROJECT_NAME}
 )
 ament_package()

@@ -113,17 +113,17 @@ def generate_launch_description():
         'log_level', default_value='info',
         description='log level')
 
-    # declare_mapper_online_async_param_cmd = DeclareLaunchArgument(
-    #     'async_param',
-    #     default_value=os.path.join(kpbot_nav2_dir, 'config', 'mapper_params_online_async.yaml'),
-    #     description='Set mappers online async param file')
+    declare_mapper_online_async_param_cmd = DeclareLaunchArgument(
+        'async_param',
+        default_value=os.path.join(kpbot_nav2_dir, 'config', 'mapper_params_online_async.yaml'),
+        description='Set mappers online async param file')
 
-    mapper_online_async_param_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py'),
-        ),
-        launch_arguments=[('slam_params_file', LaunchConfiguration('async_param'))],
-    )
+    # mapper_online_async_param_launch = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(
+    #         os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py'),
+    #     ),
+    #     launch_arguments=[('slam_params_file', LaunchConfiguration('async_param'))],
+    # )
     
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
         'rviz_config',

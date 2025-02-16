@@ -5,7 +5,7 @@ from rclpy.node import Node
 from lifecycle_msgs.srv import ChangeState
 from lifecycle_msgs.msg import Transition
 from rclpy.action import ActionServer
-from kpbot_interfaces.action import PynavGoal
+from kpbot_interface.action import PynavGoal
 from rclpy.action.server import ServerGoalHandle, GoalResponse, CancelResponse
 import threading
 from rclpy.executors import MultiThreadedExecutor
