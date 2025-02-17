@@ -37,6 +37,11 @@ install(PROGRAMS
     ${SCRIPTS_DIR}/nav2_api.py
     ${SCRIPTS_DIR}/joy_control.py
     ${SCRIPTS_DIR}/odometry.py
+    ${SCRIPTS_DIR}/wheel_control.py
+    ${SCRIPTS_DIR}/joy_speed_control.py
+
+
+
 
     DESTINATION lib/${PROJECT_NAME}
 )

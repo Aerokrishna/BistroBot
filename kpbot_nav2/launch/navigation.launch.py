@@ -84,7 +84,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(kpbot_nav2_dir, 'maps', 'my_map.yaml'),
+        default_value=os.path.join(kpbot_nav2_dir, 'maps', 'robocon_map.yaml'),
         description='Full path to map yaml file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -207,13 +207,11 @@ def generate_launch_description():
     ld.add_action(declare_use_composition_cmd)
     ld.add_action(declare_use_respawn_cmd)
     ld.add_action(declare_log_level_cmd)
-    ld.add_action(declare_rviz_config_file_cmd)
-    ld.add_action(start_rviz_cmd)
+    # ld.add_action(declare_rviz_config_file_cmd)
+    # ld.add_action(start_rviz_cmd)
     # ld.add_action(declare_mapper_online_async_param_cmd)
     # ld.add_action(mapper_online_async_param_launch)
     # ld.add_action(robot_localization_node)
     ld.add_action(bringup_cmd_group)
-
-
 
     return ld

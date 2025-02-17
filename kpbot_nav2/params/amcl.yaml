@@ -1,12 +1,12 @@
 amcl:
   ros__parameters:
-    use_sim_time: True
-    alpha1: 0.00005   ## alpha's are related to odom model tuning, refer Nav2 Docs
-    alpha2: 0.00005
-    alpha3: 0.00005
-    alpha4: 0.00005
+    use_sim_time: False
+    alpha1: 0.15   ## alpha's are related to odom model tuning, refer Nav2 Docs
+    alpha2: 0.15
+    alpha3: 0.15
+    alpha4: 0.15
     alpha5: 0.00005
-    base_frame_id: "base_footprint" #
+    base_frame_id: "base_link" #
     beam_skip_distance: 0.5
     beam_skip_error_threshold: 0.9
     beam_skip_threshold: 0.3
@@ -19,7 +19,7 @@ amcl:
     laser_model_type: "likelihood_field"
     max_beams: 60
     # max_particles: 5000
-    max_particles: 2000
+    max_particles: 5000
 
     # min_particles: 300
     min_particles: 500
@@ -43,7 +43,7 @@ amcl:
     z_rand: 0.5
     z_short: 0.05
     scan_topic: "/scan"
-    odom_topic: "/odom"
+    odom_topic: "/odometry/filtered"
     map_topic: "/map"
     set_initial_pose: True
     always_reset_initial_pose: False
@@ -51,13 +51,13 @@ amcl:
     initial_pose:
       x: 0.0
       y: 0.0
-      z: 0.1
+      z: 0.0
       yaw: 0.0
 
 amcl_map_client:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
 
 amcl_rclcpp_node:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False

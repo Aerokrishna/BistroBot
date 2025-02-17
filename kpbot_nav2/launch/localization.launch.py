@@ -20,6 +20,24 @@ def generate_launch_description():
         'ekf_params.yaml'
     )
 
+    amcl_config_path = os.path.join(
+        get_package_share_directory('kpbot_nav2'),  # Change to your package name
+        'params',
+        'amcl.yaml'
+    )
+
+    map_config_path = os.path.join(
+        get_package_share_directory('kpbot_nav2'),  # Change to your package name
+        'maps',
+        'robocon_map.yaml'
+    )
+
+    nav2_params = os.path.join(
+        get_package_share_directory('kpbot_nav2'),  # Change to your package name
+        'params',
+        'nav2_params.yaml'
+    )
+
     return LaunchDescription([
        
         Node(
@@ -30,12 +48,27 @@ def generate_launch_description():
             parameters=[ekf_config_path]
         ),
 
-        Node(
-            package='slam_toolbox',
-            executable='async_slam_toolbox_node',
-            name='slam_toolbox',
-            output='screen',
-            parameters=[slam_params_path]
-        )
-        
+        # Node(
+        #     package='slam_toolbox',
+        #     executable='async_slam_toolbox_node',
+        #     name='slam_toolbox',
+        #     output='screen',
+        #     parameters=[slam_params_path]
+        # )
+
+        # Node(
+        #     package='nav2_amcl',
+        #     executable='amcl',
+        #     name='amcl',
+        #     output='screen',
+        #     parameters=[amcl_config_path]
+        # ),
+
+        # Node(
+        #     package="nav2_map_server",
+        #     executable="map_server",
+        #     name="map_server",
+        #     output="screen",
+        #     parameters=[nav2_params, {'yaml_filename': map_config_path}]
+        # )
     ])

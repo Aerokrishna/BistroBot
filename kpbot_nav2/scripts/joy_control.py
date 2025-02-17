@@ -63,6 +63,7 @@ class JoyController(Node):
         self.cnt = 0
 
         self.max_pwm = 150
+        self.get_logger().info("JOY CONTROLLER")
 
     #callback subscribes from ps4 controller and stores velocity in variables
     def joy_callback(self, joy_msg: Joy):
@@ -100,7 +101,6 @@ class JoyController(Node):
     def pwm_callback (self):
         msg = WheelPWM()
         if self.status == 0:
-            self.get_logger().info("MANUAL MODE")
             msg.pwm_left = self.pwm_left
             msg.pwm_right = self.pwm_right
             msg.dir_left = self.dir_left

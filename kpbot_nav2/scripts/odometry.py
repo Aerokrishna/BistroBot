@@ -35,7 +35,7 @@ class OdometryNode(Node):
         self.get_logger().info("ODOMETRY NODE STARTED")
 
     def sensor_callback(self, sensor_msg: Sensor):
-        self.imu_yaw = sensor_msg.imu_yaw
+        self.imu_yaw = self.normalize_angle(angle = sensor_msg.imu_yaw)
 
         dis_enc_left = self.met_per_tick * sensor_msg.enc_left_val
         dis_enc_right = self.met_per_tick * sensor_msg.enc_right_val
@@ -47,6 +47,8 @@ class OdometryNode(Node):
         self.odom_x += dis_robot * np.cos(self.odom_theta + (theta_robot / 2))
         self.odom_y += dis_robot * np.sin(self.odom_theta + (theta_robot / 2))
         self.odom_theta += theta_robot
+
+        self.odom_theta = self.normalize_angle(self.odom_theta)
 
     def odom_callback(self):
         odom_msg = Odometry()
@@ -61,12 +63,12 @@ class OdometryNode(Node):
         odom_msg.pose.pose.position.z = 0.0
 
         # # Quaternion conversion for orientation
-        # quat = tf_transformations.quaternion_from_euler(0, 0, self.odom_theta)
-        # odom_msg.pose.pose.orientation.x = quat[0]
-        # odom_msg.pose.pose.orientation.y = quat[1]
-        # odom_msg.pose.pose.orientation.z = quat[2]
-        # odom_msg.pose.pose.orientation.w = quat[3]
-        odom_msg.pose.pose.orientation.z = self.odom_theta
+        quat = tf_transformations.quaternion_from_euler(0, 0, self.odom_theta)
+        odom_msg.pose.pose.orientation.x = quat[0]
+        odom_msg.pose.pose.orientation.y = quat[1]
+        odom_msg.pose.pose.orientation.z = quat[2]
+        odom_msg.pose.pose.orientation.w = quat[3]
+        # odom_msg.pose.pose.orientation.z = self.odom_theta
 
         self.odom_pub_.publish(odom_msg)
 
@@ -83,8 +85,15 @@ class OdometryNode(Node):
         imu_msg.orientation.z = quat[2]
         imu_msg.orientation.w = quat[3]
 
+        # imu_msg.orientation.z = self.imu_yaw
+
         self.imu_pub_.publish(imu_msg)
 
+    def normalize_angle(self, angle):
+
+        # makes sure angle is between -3.14 to 3.14
+        return (angle + np.pi) % (2 * np.pi) - np.pi
+    
 def main(args=None):
     rclpy.init(args=args)
     node = OdometryNode()
