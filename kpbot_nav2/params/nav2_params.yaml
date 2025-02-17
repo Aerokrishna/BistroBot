@@ -1,6 +1,6 @@
 amcl:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
     alpha1: 0.15   ## alpha's are related to odom model tuning, refer Nav2 Docs
     alpha2: 0.15
     alpha3: 0.15
@@ -56,15 +56,15 @@ amcl:
 
 amcl_map_client:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 amcl_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 bt_navigator:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
     global_frame: map
     robot_base_frame: "base_link"
     odom_topic: /odometry/filtered
@@ -112,11 +112,11 @@ bt_navigator:
 
 bt_navigator_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 controller_server:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
     controller_frequency: 20.0
     # controller_frequency: 30.0
 
@@ -138,8 +138,8 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.15
-      yaw_goal_tolerance: 0.2
+      xy_goal_tolerance: 0.25
+      yaw_goal_tolerance: 0.25
     # DWB parameters
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
@@ -147,19 +147,19 @@ controller_server:
       min_vel_x: 0.0
       min_vel_y: 0.0
       # max_vel_x: 0.3
-      max_vel_x: 0.4
+      max_vel_x: 0.25
       max_vel_y: 0.0
-      max_vel_theta: 1.2
+      max_vel_theta: 1.0
       min_speed_xy: 0.0
-      max_speed_xy: 0.4
+      max_speed_xy: 0.25
       min_speed_theta: 0.0
 
-      acc_lim_x: 1.0
+      acc_lim_x: 2.0
       acc_lim_y: 0.0
-      acc_lim_theta: 2.0
+      acc_lim_theta: 2.5
       decel_lim_x: -1.0
       decel_lim_y: 0.0
-      decel_lim_theta: -3.2
+      decel_lim_theta: -2.5
 
       vx_samples: 20
       vy_samples: 5
@@ -193,18 +193,17 @@ controller_server:
       
 controller_server_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 local_costmap:
-  local_costmap:
-    ros__parameters:
+  ros__parameters:
       # update_frequency: 3.0
       update_frequency: 10.0
 
       publish_frequency: 2.0
       global_frame: odom
       robot_base_frame: "base_link"
-      use_sim_time: False
+      use_sim_time: false
       rolling_window: true
       width: 2
       height: 2
@@ -238,64 +237,63 @@ local_costmap:
       static_layer:
         map_subscribe_transient_local: True
       always_send_full_costmap: True
-  local_costmap_client:
-    ros__parameters:
-      use_sim_time: False
-  local_costmap_rclcpp_node:
-    ros__parameters:
-      use_sim_time: False
+local_costmap_client:
+  ros__parameters:
+    use_sim_time: false
+local_costmap_rclcpp_node:
+  ros__parameters:
+    use_sim_time: false
 
 global_costmap:
-  global_costmap:
-    ros__parameters:
-      update_frequency: 1.0
-      # update_frequency: 5.0
+  ros__parameters:
+    update_frequency: 1.0
+    # update_frequency: 5.0
 
-      publish_frequency: 1.0
-      global_frame: map
-      robot_base_frame: "base_link"
-      use_sim_time: False
-      robot_radius: 0.3
-      resolution: 0.05
-      track_unknown_space: true
-      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
-      obstacle_layer:
-        plugin: "nav2_costmap_2d::ObstacleLayer"
-        enabled: True
-        observation_sources: scan
-        scan:
-          topic: /scan
-          max_obstacle_height: 2.0
-          clearing: True
-          marking: True
-          data_type: "LaserScan"
-          raytrace_max_range: 3.0
-          raytrace_min_range: 0.0
-          obstacle_max_range: 2.5
-          obstacle_min_range: 0.0
-      static_layer:
-        plugin: "nav2_costmap_2d::StaticLayer"
-        map_subscribe_transient_local: True
-      inflation_layer:
-        plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0
-        inflation_radius: 0.55
-      always_send_full_costmap: True
-  global_costmap_client:
-    ros__parameters:
-      use_sim_time: False
-  global_costmap_rclcpp_node:
-    ros__parameters:
-      use_sim_time: False
+    publish_frequency: 1.0
+    global_frame: map
+    robot_base_frame: "base_link"
+    use_sim_time: false
+    robot_radius: 0.3
+    resolution: 0.05
+    track_unknown_space: true
+    plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
+    obstacle_layer:
+      plugin: "nav2_costmap_2d::ObstacleLayer"
+      enabled: True
+      observation_sources: scan
+      scan:
+        topic: /scan
+        max_obstacle_height: 2.0
+        clearing: True
+        marking: True
+        data_type: "LaserScan"
+        raytrace_max_range: 3.0
+        raytrace_min_range: 0.0
+        obstacle_max_range: 2.5
+        obstacle_min_range: 0.0
+    static_layer:
+      plugin: "nav2_costmap_2d::StaticLayer"
+      map_subscribe_transient_local: True
+    inflation_layer:
+      plugin: "nav2_costmap_2d::InflationLayer"
+      cost_scaling_factor: 3.0
+      inflation_radius: 0.55
+    always_send_full_costmap: True
+global_costmap_client:
+  ros__parameters:
+    use_sim_time: false
+global_costmap_rclcpp_node:
+  ros__parameters:
+    use_sim_time: false
 
 map_server:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
     yaml_filename: "robocon_map.yaml"
 
 map_saver:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
     save_map_timeout: 5.0
     free_thresh_default: 0.25
     occupied_thresh_default: 0.65
@@ -306,7 +304,7 @@ planner_server:
     expected_planner_frequency: 20.0
     # expected_planner_frequency: 40.0
 
-    use_sim_time: False
+    use_sim_time: false
     planner_plugins: ["GridBased"]
     GridBased:
       plugin: "nav2_navfn_planner/NavfnPlanner"
@@ -317,7 +315,7 @@ planner_server:
 
 planner_server_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 recoveries_server:
   ros__parameters:
@@ -334,7 +332,7 @@ recoveries_server:
     global_frame: odom
     robot_base_frame: "base_link"
     transform_timeout: 0.1
-    use_sim_time: False
+    use_sim_time: false
     simulate_ahead_time: 2.0
     max_rotational_vel: 1.0
     min_rotational_vel: 0.4
@@ -342,7 +340,7 @@ recoveries_server:
 
 robot_state_publisher:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 waypoint_follower:
   ros__parameters:
@@ -361,10 +359,10 @@ velocity_smoother:
 
     scale_velocities: False
     feedback: "OPEN_LOOP"
-    max_velocity: [1.6, 0.0, 2.0]
-    min_velocity: [-1.6, 0.0, -2.0]
-    max_accel: [1.5, 0.0, 6.2]
-    max_decel: [-1.5, 0.0, -6.2]
+    max_velocity: [0.25, 0.0, 1.0]
+    min_velocity: [-0.25, 0.0, -1.0]
+    max_accel: [2.5, 0.0, 3.2]
+    max_decel: [-2.5, 0.0, -3.2]
     odom_topic: "/odometry/filtered"
     odom_duration: 0.1
     deadband_velocity: [0.0, 0.0, 0.0]

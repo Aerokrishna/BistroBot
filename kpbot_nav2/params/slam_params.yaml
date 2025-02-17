@@ -16,6 +16,8 @@ slam_toolbox:
     base_frame: base_link  #>> eBot base_frame is base_footprint, you can check it using `ros2 run tf2_tools view_frames`
     scan_topic: /scan  #>> LiDAR data is on this topic
     mode: mapping #localization  #>> Currently we will be mapping using slam-toolbox.
+    queue_size: 100
+    use_sim_time: false
 
     debug_logging: false
     throttle_scans: 1

@@ -1,0 +1,25 @@
+SLAM/Mapping 
+
+1) RPi: run microRos agent, rpi Lidar
+2) odometry node
+3) kpbot_rsp.launch.py
+4) slam.launch.py (with SLAM and ekf)
+5) joy speed control
+6) wheel control
+7) joy node
+
+Nav2/Navigating
+
+1) RPi: run microRos agent, rpi Lidar
+2) Odometry
+3) kpbot_rsp.launch.py
+4) ekf_localization.launch.py
+5) wheel_control
+6) navigation.launch.py
+
+Joy/Controller
+1) RPi: run microRos agent
+2) joy speed control
+3) wheel control
+4) joy node
+

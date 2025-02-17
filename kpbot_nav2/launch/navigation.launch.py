@@ -38,6 +38,8 @@ def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
     launch_dir = os.path.join(bringup_dir, 'launch')
     kpbot_nav2_dir = get_package_share_directory('kpbot_nav2')
+    kpbot_description_path = get_package_share_directory('kpbot_description')
+
     
     namespace = LaunchConfiguration('namespace')
     use_namespace = LaunchConfiguration('use_namespace')
@@ -50,6 +52,8 @@ def generate_launch_description():
     use_respawn = LaunchConfiguration('use_respawn')
     log_level = LaunchConfiguration('log_level')
     rviz_config_file = LaunchConfiguration('rviz_config')
+
+    rviz_config_path = os.path.join(kpbot_description_path, 'rviz', 'kpbot_config.rviz')
 
     remappings = [('/tf', 'tf'),
                   ('/tf_static', 'tf_static')]
@@ -161,6 +165,14 @@ def generate_launch_description():
             arguments=['--ros-args', '--log-level', log_level],
             remappings=remappings,
             output='screen'),
+        
+        # Node(
+        #     package='rviz2',
+        #     executable='rviz2',
+        #     output='screen',
+        #     arguments=['-d', rviz_config_path],
+        #     parameters=[{'use_sim_time': use_sim_time}]
+        # ),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(launch_dir, 'slam_launch.py')),

@@ -58,8 +58,8 @@ class WheelControlNode(Node):
         robot_w = 2 * msg_cmd_vel.angular.z
 
         # calculate the targt wheel angular velocity using the cmd  velocity
-        self.target_right_wheel_rpm = ((robot_v - (robot_w * (self.wheel_sep/2)))/self.wheel_radius) * 9.55
-        self.target_left_wheel_rpm = ((robot_v + (robot_w * (self.wheel_sep/2)))/self.wheel_radius) * 9.55
+        self.target_right_wheel_rpm = ((robot_v + (robot_w * (self.wheel_sep/2)))/self.wheel_radius) * 9.55
+        self.target_left_wheel_rpm = ((robot_v - (robot_w * (self.wheel_sep/2)))/self.wheel_radius) * 9.55
 
         # self.get_logger().info(f"TARGET v,w {robot_v, robot_w}")
         # self.get_logger().info(f"TARGET Wheel rpm {self.target_right_wheel_rpm, self.target_left_wheel_rpm}")
