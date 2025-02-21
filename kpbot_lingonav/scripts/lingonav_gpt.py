@@ -6,7 +6,7 @@ class InferHumanCommand():
         # Define hard-coded locations with their coordinates
         self.locations = {
             
-            "Table 1": (3.0, 0.0),
+            "Table 1": (1.5, 1.5),
             "Table 2": (3.0, 2.5),
             "Table 3": (4.0, 1.5),
             "Table 4": (4.1, 3.5),

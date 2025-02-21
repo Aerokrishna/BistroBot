@@ -18,48 +18,55 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
 
 def generate_launch_description():
-    package_name = 'kpbot_nav2'  # Change to your package name
 
-    slam_params_path = PathJoinSubstitution([
-        get_package_share_directory(package_name),
-        'params',
-        'slam_params.yaml'
-    ])
+    kpbot_nav2_path = get_package_share_directory('kpbot_nav2')
+    rplidar_path = get_package_share_directory('rplidar_ros')
 
-    ekf_config_path = PathJoinSubstitution([
-        get_package_share_directory(package_name),
-        'params',
-        'ekf_params.yaml'
-    ])
-
-    nav2_bringup_path = get_package_share_directory('nav2_bringup')
 
     return LaunchDescription([
         # Set environment variable (optional)
         SetEnvironmentVariable('RCUTILS_CONSOLE_OUTPUT_FORMAT', '[{severity}] [{time}]: {message}'),
 
-        # Extended Kalman Filter Node (Robot Localization)
         Node(
-            package='robot_localization',
-            executable='ekf_node',
-            name='ekf_filter_node',
+            package='kpbot_nav2',
+            executable='joy_speed_control.py',
+            name='joy_speed_control',
             output='screen',
-            parameters=[ekf_config_path]
         ),
 
+        Node(
+            package='kpbot_nav2',
+            executable='odometry.py',
+            name='odometry',
+            output='screen',
+        ),
+        
         # SLAM Toolbox Node
         Node(
-            package='slam_toolbox',
-            executable='async_slam_toolbox_node',
-            name='slam_toolbox',
+            package='kpbot_nav2',
+            executable='wheel_control.py',
+            name='wheel_control',
             output='screen',
-            parameters=[slam_params_path]
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                PathJoinSubstitution([kpbot_nav2_path, 'launch', 'kpbot_rsp.launch.py'])
+            )
         ),
 
         # Include Nav2 localization launch file
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                PathJoinSubstitution([nav2_bringup_path, 'launch', 'localization_launch.py'])
+                PathJoinSubstitution([kpbot_nav2_path, 'launch', 'slam.launch.py'])
             )
-        )
+        ),
+        # IncludeLaunchDescription(
+        #     PythonLaunchDescriptionSource(
+        #         PathJoinSubstitution([rplidar_path, 'launch', 'rplidar_a1_launch.py'])
+        #     ),
+        #     launch_arguments={
+        # 'serial_port': '/dev/ttyUSB0',
+        # 'frame_id': 'base_scan'}.items()
+        # )
     ])

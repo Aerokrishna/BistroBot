@@ -33,7 +33,7 @@ set(SCRIPTS_DIR scripts)
 install(PROGRAMS
     ${SCRIPTS_DIR}/kpbot_nav_manager.py
     ${SCRIPTS_DIR}/kpbot_nav_client.py
-    ${SCRIPTS_DIR}/lingonav.py
+    ${SCRIPTS_DIR}/lingonav_gpt.py
     DESTINATION lib/${PROJECT_NAME}
 )
 ament_package()

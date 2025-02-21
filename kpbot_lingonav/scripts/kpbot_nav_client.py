@@ -4,8 +4,8 @@ from rclpy.node import Node
 from rclpy.action import ActionClient
 from rclpy.action.client import ClientGoalHandle, GoalStatus
 from kpbot_interface.action import PynavGoal
-from lingonav import InferHumanCommand
-
+from lingonav_gpt import InferHumanCommand
+from lingonav_spacy import infer_human_command, infer_human_speech
 
 '''
 WHAT CAN A CLIENT DO?
@@ -109,16 +109,19 @@ class NavigationRequest(Node):
          
 def main(args=None):
     rclpy.init(args=args)
-
-    nlp = InferHumanCommand()
-    # Convert the structured output into an array of goal points
-    structured_output = nlp.infer_human_command()
-    waypoints = nlp.parse_waypoints(structured_output)
-    print("Goal Points:", waypoints)
-
     node = NavigationRequest()
+
+    # nlp = InferHumanCommand()
+    # # Convert the structured output into an array of goal points
+    # structured_output = nlp.infer_human_command()
+    # waypoints = nlp.parse_waypoints(structured_output)
+    # print("Goal Points:", waypoints)
+
+    transcript = infer_human_speech()
+    location_seq, coordinate_seq = infer_human_command(transcript)
+    node.get_logger().info(f"LOCATIONS : {location_seq}, COORDINATES : {coordinate_seq}")
     # waypoints = [(2.0, 2.0, 0.0), (2.7, 3.6, 0.0)]
-    node.send_goal(waypoints) # call the send goal function
+    node.send_goal(coordinate_seq) # call the send goal function
     rclpy.spin(node) # then spin the node to wait for result
     rclpy.shutdown()
 
