@@ -32,11 +32,11 @@ def generate_launch_description():
             output='screen',
         ),
 
-        Node(
-            package='joy',
-            executable='joy_node',
-            name='joy_node',
-            output='screen',
-        ),
+        # Node(
+        #     package='joy',
+        #     executable='joy_node',
+        #     name='joy_node',
+        #     output='screen',
+        # ),
 
     ])
