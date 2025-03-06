@@ -53,6 +53,13 @@ def generate_launch_description():
             name='wheel_control',
             output='screen',
         ),
+        
+        Node(
+            package="micro_ros_agent",
+            executable="micro_ros_agent",
+            arguments=["serial", "--dev", "/dev/ttyACM0"],
+            output="screen"
+        ),
   
         # launches robot state publisher and joint state publisher
         IncludeLaunchDescription(

@@ -30,7 +30,7 @@ def generate_launch_description():
             parameters=[{'robot_description': Command(['xacro ', urdf_path])},
                 {'use_sim_time': False}]
         ),
-
+        
         # Node(
         #     package='rviz2',
         #     executable='rviz2',
