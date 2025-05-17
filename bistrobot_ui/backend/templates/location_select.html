@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select Locations for Tray {{ tray_id }}</title>
+  <script>
+    let selected = new Set();
+
+    function toggleLocation(id) {
+      const btn = document.getElementById("loc" + id);
+      if (selected.has(id)) {
+        selected.delete(id);
+        btn.style.backgroundColor = "";
+      } else {
+        selected.add(id);
+        btn.style.backgroundColor = "lightblue";
+      }
+    }
+
+    function confirmLocations() {
+      fetch(`/confirm_locations/{{ tray_id }}`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ locations: Array.from(selected) })
+      }).then(res => res.json()).then(data => {
+        if (data.success) window.location.href = "/select_trays";
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>Select Locations for Tray {{ tray_id }}</h1>
+  <div>
+    {% for loc in range(1, 16) %}
+    <button id="loc{{ loc }}" onclick="toggleLocation('{{ loc }}')">Location {{ loc }}</button>    {% endfor %}
+  </div>
+  <br>
+  <button onclick="confirmLocations()">Confirm Locations</button>
+</body>
+</html>

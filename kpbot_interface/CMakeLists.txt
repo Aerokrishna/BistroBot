@@ -14,6 +14,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/GoalPose.msg"
   "msg/Sensor.msg"
   "msg/WheelPWM.msg"
+  "srv/DeliveryPlan.srv"
 
 
 )

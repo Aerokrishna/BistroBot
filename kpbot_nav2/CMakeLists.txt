@@ -30,10 +30,6 @@ install(PROGRAMS
     ${SCRIPTS_DIR}/joy_speed_control.py
     ${SCRIPTS_DIR}/bldc_control.py
 
-
-
-
-
     DESTINATION lib/${PROJECT_NAME}
 )
 ament_package()

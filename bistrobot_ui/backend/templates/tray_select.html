@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select Trays</title>
+  <style>
+    .highlighted-tray {
+      background-color: lightgreen;
+      width: 200px;
+      height: 50px;
+    }
+    .default-tray {
+      background-color: white;
+      width: 200px;
+      height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Select Trays for Delivery</h1>
+  {% for tray in [1, 2, 3] %}
+    <form action="/select_locations/{{ tray }}">
+    <button class="{{ 'highlighted-tray' if delivery_plan.get(tray) else 'default-tray' }}">        Tray {{ tray }} - Locations: {{ delivery_plan[tray]|join(', ') if delivery_plan[tray] else 'No locations chosen' }}
+      </button>
+    </form>
+  {% endfor %}
+  <form id="startForm" action="/start_delivery" method="post">
+    <button type="submit">Start Delivery</button>
+  </form>
+</body>
+</html>
