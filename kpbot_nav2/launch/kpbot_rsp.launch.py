@@ -11,6 +11,7 @@ def generate_launch_description():
     
     urdf_path = os.path.join(kpbot_description_path, 'urdf', 'kpbot_main.urdf.xacro')
     rviz_config_path = os.path.join(kpbot_description_path, 'rviz', 'kpbot_config.rviz')
+    rplidar_path = get_package_share_directory('rplidar_ros')
 
     return LaunchDescription([
         
@@ -29,13 +30,20 @@ def generate_launch_description():
             parameters=[{'robot_description': Command(['xacro ', urdf_path])},
                 {'use_sim_time': False}]
         ),
-
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            output='screen',
-            arguments=['-d', rviz_config_path],
-            parameters=[{'use_sim_time': False}]
-        ),
         
+        # Node(
+        #     package='rviz2',
+        #     executable='rviz2',
+        #     output='screen',
+        #     arguments=['-d', rviz_config_path],
+        #     parameters=[{'use_sim_time': False}]
+        # ),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                PathJoinSubstitution([rplidar_path, 'launch', 'rplidar_a1_launch.py'])
+            ),
+            launch_arguments={
+        'serial_port': '/dev/ttyUSB0',
+        'frame_id': 'base_scan'}.items()
+        )
     ])

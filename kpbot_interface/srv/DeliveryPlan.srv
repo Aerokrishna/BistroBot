@@ -1,0 +1,5 @@
+int32[] location_ids
+int32[] tray_number
+
+---
+string status

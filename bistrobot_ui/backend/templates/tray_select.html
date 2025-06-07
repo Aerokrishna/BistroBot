@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Trays</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+    }
+
+    h1 {
+      margin: 30px 0 20px 0;
+      color: #fff;
+      text-align: center;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px #ffb347;
+    }
+
+    .tray-layout {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100% - 120px);
+    }
+
+    .tray-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 40px;
+    }
+
+    .tray-button {
+      width: 250px;
+      height: 50vh;
+      font-size: 1.3rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(255, 193, 7, 0.18);
+      transition: background 0.3s, transform 0.2s, color 0.2s;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .highlighted-tray {
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      color: #222;
+      border: 2px solid #00c853;
+      box-shadow: 0 0 16px #43e97b99;
+    }
+
+    .default-tray {
+      background: linear-gradient(135deg, #fff 0%, #ffe259 100%);
+      color: #333;
+      border: 2px solid #ffd200;
+    }
+
+    .tray-button:hover {
+      transform: scale(1.06);
+      background: linear-gradient(135deg, #ff512f 0%, #f09819 100%);
+      color: #fff;
+    }
+
+    .start-button {
+      position: absolute;
+      bottom: 24px;
+      right: 32px;
+      padding: 18px 36px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(90deg, #36d1c4 0%, #5b86e5 100%);
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(91,134,229,0.18);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .start-button:hover {
+      background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+      transform: scale(1.07);
+    }
+
+    form {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Select Trays for Delivery</h1>
+
+  <div class="tray-layout">
+    <!-- Tray 1 -->
+    <div class="tray-column">
+      <form action="/select_locations/1">
+        <button class="tray-button {{ 'highlighted-tray' if delivery_plan.get(1) else 'default-tray' }}">
+          Tray 1<br><br>
+          Location IDs: {{ delivery_plan[1]|join(', ') if delivery_plan[1] else 'None' }}<br>
+          Locations: {% if delivery_plan[1] %}{{ delivery_plan[1]|length }} selected{% else %}No locations chosen{% endif %}
+        </button>
+      </form>
+    </div>
+
+    <!-- Tray 2 (center) -->
+    <div class="tray-column">
+      <form action="/select_locations/2">
+        <button class="tray-button {{ 'highlighted-tray' if delivery_plan.get(2) else 'default-tray' }}">
+          Tray 2<br><br>
+          Location IDs: {{ delivery_plan[2]|join(', ') if delivery_plan[2] else 'None' }}<br>
+          Locations: {% if delivery_plan[2] %}{{ delivery_plan[2]|length }} selected{% else %}No locations chosen{% endif %}
+        </button>
+      </form>
+    </div>
+
+    <!-- Tray 3 -->
+    <div class="tray-column">
+      <form action="/select_locations/3">
+        <button class="tray-button {{ 'highlighted-tray' if delivery_plan.get(3) else 'default-tray' }}">
+          Tray 3<br><br>
+          Location IDs: {{ delivery_plan[3]|join(', ') if delivery_plan[3] else 'None' }}<br>
+          Locations: {% if delivery_plan[3] %}{{ delivery_plan[3]|length }} selected{% else %}No locations chosen{% endif %}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <form id="startForm" action="/start_delivery" method="post">
+    <button type="submit" class="start-button">Start Delivery</button>
+  </form>
+</body>
+</html>

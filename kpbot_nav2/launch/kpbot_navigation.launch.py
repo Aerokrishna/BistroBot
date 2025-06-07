@@ -37,6 +37,12 @@ def generate_launch_description():
             name='wheel_control',
             output='screen',
         ),
+        Node(
+            package="micro_ros_agent",
+            executable="micro_ros_agent",
+            arguments=["serial", "--dev", "/dev/ttyACM0"],
+            output="screen"
+        ),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -50,19 +56,11 @@ def generate_launch_description():
                 PathJoinSubstitution([kpbot_nav2_path, 'launch', 'ekf_localization.launch.py'])
             )
         ),
-        # IncludeLaunchDescription(
-        #     PythonLaunchDescriptionSource(
-        #         PathJoinSubstitution([rplidar_path, 'launch', 'rplidar_a1_launch.py'])
-        #     ),
-        #     launch_arguments={
-        # 'serial_port': '/dev/ttyUSB0',
-        # 'frame_id': 'base_scan'}.items()
-        # ),
 
-        # IncludeLaunchDescription(
-        #     PythonLaunchDescriptionSource(
-        #         PathJoinSubstitution([kpbot_nav2_path, 'launch', 'navigation.launch.py'])
-        #     ),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                PathJoinSubstitution([kpbot_nav2_path, 'launch', 'navigation.launch.py'])
+            ),
             
-        # )
+        )
     ])

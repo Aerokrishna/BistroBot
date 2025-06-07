@@ -32,11 +32,17 @@ def generate_launch_description():
             output='screen',
         ),
 
-        Node(
-            package='joy',
-            executable='joy_node',
-            name='joy_node',
-            output='screen',
-        ),
+       Node(
+            package="micro_ros_agent",
+            executable="micro_ros_agent",
+            arguments=["serial", "--dev", "/dev/ttyACM0"],
+            output="screen"
+        )
+        # Node(
+        #     package='joy',
+        #     executable='joy_node',
+        #     name='joy_node',
+        #     output='screen',
+        # ),
 
     ])

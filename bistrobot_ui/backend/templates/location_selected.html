@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Locations for Tray {{ tray_id }}</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: rgba(255,255,255,0.97);
+      border-radius: 20px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+      padding: 40px 32px;
+      text-align: center;
+      max-width: 420px;
+    }
+    h1 {
+      color: #ff512f;
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      letter-spacing: 1.5px;
+    }
+    .locations-list {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 28px;
+    }
+    .btn {
+      background: linear-gradient(90deg, #36d1c4 0%, #5b86e5 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(91,134,229,0.13);
+      transition: background 0.3s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Locations for Tray {{ tray_id }}</h1>
+    <div class="locations-list">
+      {{ selected_locations|join(', ') if selected_locations else 'No locations selected.' }}
+    </div>
+    <a href="/tray_select" class="btn">Back to Tray Selection</a>
+  </div>
+</body>
+</html>

@@ -1,1 +1,1 @@
-# BistroBot
+# LingoNav
