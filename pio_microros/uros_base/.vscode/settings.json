@@ -1,0 +1,26 @@
+{
+    "files.associations": {
+        "cmath": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled",
+    "python.autoComplete.extraPaths": [
+        "/home/shamanth/TestingPhase/build/remake",
+        "/home/shamanth/TestingPhase/install/remake/lib/python3.10/site-packages",
+        "/home/shamanth/TestingPhase/build/botremotecontrol",
+        "/home/shamanth/TestingPhase/install/botremotecontrol/lib/python3.10/site-packages",
+        "/home/shamanth/TestingPhase/install/custom_interface/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages",
+        "/home/shamanth/microros_ws/install/micro_ros_msgs/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/shamanth/TestingPhase/build/remake",
+        "/home/shamanth/TestingPhase/install/remake/lib/python3.10/site-packages",
+        "/home/shamanth/TestingPhase/build/botremotecontrol",
+        "/home/shamanth/TestingPhase/install/botremotecontrol/lib/python3.10/site-packages",
+        "/home/shamanth/TestingPhase/install/custom_interface/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages",
+        "/home/shamanth/microros_ws/install/micro_ros_msgs/local/lib/python3.10/dist-packages"
+    ]
+}
